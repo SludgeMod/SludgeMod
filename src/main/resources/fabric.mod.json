@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "sludge",
+  "version": "${version}",
+  "name": "Sludge Mod",
+  "description": "A mod to create resources from sludge",
+  "authors": [
+    "flayan",
+    "Anders"
+  ],
+  "contact": {
+    "homepage": "https://github.com/sludgemod/sludgemod",
+    "sources": "https://github.com/sludgemod/sludgemod"
+  },
+  "license": "MIT",
+  "icon": "assets/sludge/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.sludgemod.sludge.SludgeModKt::init"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.8.2",
+    "fabric": "*",
+    "fabric-language-kotlin": "*"
+  }
+}
