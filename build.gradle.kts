@@ -8,6 +8,7 @@ val fabric_version: String by project
 val fabric_kotlin_version: String by project
 val mod_version: String by project
 val maven_group: String by project
+val rei_version: String by project
 
 plugins {
     kotlin("jvm")
@@ -50,6 +51,11 @@ dependencies {
     modImplementation(group = "net.fabricmc", name = "fabric-loader", version = loader_version)
     modImplementation(group = "net.fabricmc.fabric-api", name = "fabric-api", version = fabric_version)
     modImplementation(group = "net.fabricmc", name = "fabric-language-kotlin", version = fabric_kotlin_version)
+    modImplementation(group = "me.shedaniel", name = "RoughlyEnoughItems", version = rei_version) {
+        exclude(module = "minecraft")
+        exclude(module = "fabric-loader")
+        exclude(module = "fabric-api")
+    }
 }
 
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task

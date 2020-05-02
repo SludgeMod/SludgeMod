@@ -3,7 +3,7 @@ package net.sludgemod.sludge.shared.fluids
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.FluidBlock
-import net.minecraft.fluid.BaseFluid
+import net.minecraft.fluid.FlowableFluid
 import net.minecraft.fluid.Fluid
 import net.minecraft.fluid.FluidState
 import net.minecraft.item.Item
@@ -15,7 +15,7 @@ import net.minecraft.world.IWorld
 import net.minecraft.world.WorldView
 import net.sludgemod.sludge.SludgeInit
 
-abstract class SludgeFluid : BaseFluid() {
+abstract class SludgeFluid : FlowableFluid() {
     override fun toBlockState(state: FluidState): BlockState {
         return SludgeInit.SLUDGE_FLUID_BLOCK.defaultState.with(FluidBlock.LEVEL, method_15741(state))
     }
@@ -74,11 +74,11 @@ abstract class SludgeFluid : BaseFluid() {
     class Flowing : SludgeFluid() {
         override fun appendProperties(builder: StateManager.Builder<Fluid, FluidState>) {
             super.appendProperties(builder)
-            builder.add(BaseFluid.LEVEL)
+            builder.add(FlowableFluid.LEVEL)
         }
 
         override fun getLevel(state: FluidState): Int {
-            return state.get(BaseFluid.LEVEL) as Int
+            return state.get(FlowableFluid.LEVEL) as Int
         }
 
         override fun isStill(state: FluidState): Boolean {
