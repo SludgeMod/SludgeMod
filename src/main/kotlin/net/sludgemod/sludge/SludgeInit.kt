@@ -1,7 +1,8 @@
 package net.sludgemod.sludge
 
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.block.FabricBlockSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.block.Blocks
 import net.minecraft.block.FluidBlock
@@ -29,7 +30,7 @@ object SludgeInit : ModInitializer {
     val SLUDGE_BUCKET = BucketItem(STILL_SLUDGE, Item.Settings().group(SLUDGE_ITEM_GROUP).recipeRemainder(Items.BUCKET).maxCount(1))
 
     //Blocks
-    val SLUDGE_FLUID_BLOCK = object: FluidBlock(STILL_SLUDGE, FabricBlockSettings.copy(Blocks.WATER).build()) {}
+    val SLUDGE_FLUID_BLOCK = object: FluidBlock(STILL_SLUDGE, FabricBlockSettings.copy(Blocks.WATER)) {}
 
     override fun onInitialize() {
         Registry.register(Registry.ITEM, Identifier(MOD_ID, "sludge_item"), SLUDGE_ITEM)

@@ -1,2 +1,2 @@
 # Sludge Mod - Kotlin
-A mod to create resources from sludge
+A minecraft mod to create resources from sludge

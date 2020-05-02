@@ -18,6 +18,7 @@ import net.minecraft.util.registry.Registry
 import net.minecraft.world.BlockRenderView
 
 object FluidManager {
+    @Suppress("DEPRECATION")
     fun setupFluidRendering(
         still: Fluid,
         flowing: Fluid,
