@@ -16,7 +16,7 @@ import net.minecraft.world.WorldView
 import net.sludgemod.sludge.SludgeInit
 
 abstract class SludgeFluid : BaseFluid() {
-    override fun toBlockState(state: FluidState?): BlockState {
+    override fun toBlockState(state: FluidState): BlockState {
         return SludgeInit.SLUDGE_FLUID_BLOCK.defaultState.with(FluidBlock.LEVEL, method_15741(state))
     }
 
@@ -24,15 +24,15 @@ abstract class SludgeFluid : BaseFluid() {
         return SludgeInit.SLUDGE_BUCKET
     }
 
-    override fun getLevelDecreasePerBlock(world: WorldView?): Int {
+    override fun getLevelDecreasePerBlock(world: WorldView): Int {
         return 1
     }
 
-    override fun matchesType(fluid: Fluid?): Boolean {
+    override fun matchesType(fluid: Fluid): Boolean {
         return fluid == still || fluid == flowing
     }
 
-    override fun getTickRate(world: WorldView?): Int {
+    override fun getTickRate(world: WorldView): Int {
         return 5
     }
 
@@ -44,16 +44,16 @@ abstract class SludgeFluid : BaseFluid() {
         return true
     }
 
-    override fun getFlowSpeed(world: WorldView?): Int {
+    override fun getFlowSpeed(world: WorldView): Int {
         return 3
     }
 
     override fun canBeReplacedWith(
-        state: FluidState?,
-        world: BlockView?,
-        pos: BlockPos?,
-        fluid: Fluid?,
-        direction: Direction?
+        state: FluidState,
+        world: BlockView,
+        pos: BlockPos,
+        fluid: Fluid,
+        direction: Direction
     ): Boolean {
         return false
     }

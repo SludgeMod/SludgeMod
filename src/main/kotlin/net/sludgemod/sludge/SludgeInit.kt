@@ -38,13 +38,8 @@ object SludgeInit : ModInitializer {
         Registry.register(Registry.FLUID, Identifier(MOD_ID, "sludge"), STILL_SLUDGE)
         Registry.register(Registry.FLUID, Identifier(MOD_ID, "flowing_sludge"), FLOWING_SLUDGE)
 
-        Registry.register( Registry.BLOCK, Identifier(MOD_ID, "sludge"), SLUDGE_FLUID_BLOCK)
+        Registry.register(Registry.BLOCK, Identifier(MOD_ID, "sludge"), SLUDGE_FLUID_BLOCK)
 
-        FluidManager.setupFluidRendering(
-            STILL_SLUDGE,
-            FLOWING_SLUDGE,
-            Identifier("minecraft", "water"),
-            0x964b13
-        )
+        FluidManager.setupFluidRendering(STILL_SLUDGE, FLOWING_SLUDGE, Identifier("minecraft", "water"), 0x964b13)
     }
 }
