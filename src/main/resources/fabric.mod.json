@@ -26,6 +26,8 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "fabric-language-kotlin": "*"
+    "fabric-language-kotlin": "*",
+    "team_reborn_energy": ">=0.1.0",
+    "libblockattributes_fluids": "*"
   }
 }

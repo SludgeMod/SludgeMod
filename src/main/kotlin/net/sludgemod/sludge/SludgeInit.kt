@@ -2,7 +2,6 @@ package net.sludgemod.sludge
 
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.block.Blocks
 import net.minecraft.block.FluidBlock
