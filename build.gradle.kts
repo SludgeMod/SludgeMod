@@ -44,6 +44,9 @@ tasks.jar {
 
 repositories {
     mavenLocal()
+    maven {
+        url = uri("https://raw.githubusercontent.com/SludgeMod/maven-repo/master/")
+    }
     maven { url = uri("https://maven.fabricmc.net/") }
     maven {
         name = "BuildCraft"
