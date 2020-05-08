@@ -23,6 +23,9 @@
       }
     ]
   },
+  "mixins": [
+    "sludge.mixins.json"
+  ],
   "depends": {
     "fabricloader": "*",
     "fabric": "*",

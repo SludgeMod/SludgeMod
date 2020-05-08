@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "net.sludgemod.sludge.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ItemEntityMixin"
+  ],
+  "client": [
+    "FluidRendererMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

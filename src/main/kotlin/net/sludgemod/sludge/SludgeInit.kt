@@ -25,7 +25,7 @@ object SludgeInit : ModInitializer {
     val FLOWING_SLUDGE = SludgeFluid.Flowing()
 
     //Items
-    private val SLUDGE_ITEM = SludgeItem()
+    val SLUDGE_ITEM = SludgeItem()
     val SLUDGE_BUCKET = BucketItem(STILL_SLUDGE, Item.Settings().group(SLUDGE_ITEM_GROUP).recipeRemainder(Items.BUCKET).maxCount(1))
 
     //Blocks
