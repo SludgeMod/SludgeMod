@@ -19,7 +19,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value":"net.sludgemod.sludge.SludgeInit"
+        "value": "net.sludgemod.sludge.SludgeInit"
       }
     ]
   },

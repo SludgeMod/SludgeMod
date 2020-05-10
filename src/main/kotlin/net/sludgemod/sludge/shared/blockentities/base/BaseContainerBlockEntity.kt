@@ -1,4 +1,4 @@
-package net.sludgemod.sludge.shared.utils
+package net.sludgemod.sludge.shared.blockentities.base
 
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -10,16 +10,17 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.collection.DefaultedList
 
-abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>): BlockEntity(blockEntityType), Inventory {
+abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) : BlockEntity(blockEntityType), Inventory {
 
     abstract val items: DefaultedList<ItemStack>
 
+    //region Inventory
     override fun clear() = items.clear()
 
     override fun setStack(slot: Int, stack: ItemStack) {
-        items[slot] = stack;
+        items[slot] = stack
         if (stack.count > maxCountPerStack) {
-            stack.count = maxCountPerStack;
+            stack.count = maxCountPerStack
         }
     }
 
@@ -42,22 +43,25 @@ abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>): Bl
     }
 
     override fun removeStack(slot: Int): ItemStack {
-        return Inventories.removeStack(items, slot);
+        return Inventories.removeStack(items, slot)
     }
 
     override fun getStack(slot: Int) = items[slot]
 
-    override fun canPlayerUse(player: PlayerEntity?) = true
+    override fun canPlayerUse(player: PlayerEntity) = true
 
     override fun size() = items.size
+    //endregion
 
+    //region BlockEntity
     override fun fromTag(state: BlockState, tag: CompoundTag) {
         super.fromTag(state, tag)
         Inventories.fromTag(tag, items)
     }
 
-    override fun toTag(tag: CompoundTag): CompoundTag? {
+    override fun toTag(tag: CompoundTag): CompoundTag {
         Inventories.toTag(tag, items)
         return super.toTag(tag)
     }
+    //endregion
 }

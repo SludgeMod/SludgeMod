@@ -22,7 +22,8 @@ public abstract class ItemEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Shadow public abstract ItemStack getStack();
+    @Shadow
+    public abstract ItemStack getStack();
 
     @Inject(
             at = @At("HEAD"),
@@ -30,8 +31,8 @@ public abstract class ItemEntityMixin extends Entity {
     )
     private void injectMethod(CallbackInfo info) {
         ItemStack itemStack = this.getStack();
-        if(itemStack.getItem() == SludgeInit.INSTANCE.getSLUDGE_ITEM()) {
-            if(itemStack.getCount() < 10) {
+        if (itemStack.getItem() == SludgeInit.INSTANCE.getSLUDGE_ITEM()) {
+            if (itemStack.getCount() < 10) {
                 return;
             }
 
@@ -39,8 +40,7 @@ public abstract class ItemEntityMixin extends Entity {
 
             FluidState fluidState = this.world.getFluidState(blockPos);
 
-            if(Fluids.WATER.getStill() == fluidState.getFluid())
-            {
+            if (Fluids.WATER.getStill() == fluidState.getFluid()) {
                 itemStack.decrement(10);
                 this.world.setBlockState(blockPos, SludgeInit.INSTANCE.getSLUDGE_FLUID_BLOCK().getFluidState(fluidState.getBlockState()).getBlockState());
             }
