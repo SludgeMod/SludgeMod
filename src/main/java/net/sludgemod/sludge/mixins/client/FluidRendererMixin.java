@@ -1,4 +1,4 @@
-package net.sludgemod.sludge.mixins;
+package net.sludgemod.sludge.mixins.client;
 
 import net.minecraft.client.render.block.FluidRenderer;
 import net.minecraft.fluid.Fluid;

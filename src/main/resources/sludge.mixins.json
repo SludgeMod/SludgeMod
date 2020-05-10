@@ -6,7 +6,7 @@
     "ItemEntityMixin"
   ],
   "client": [
-    "FluidRendererMixin"
+    "client.FluidRendererMixin"
   ],
   "server": [
   ],
