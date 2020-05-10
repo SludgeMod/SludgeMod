@@ -16,7 +16,6 @@ import net.sludgemod.sludge.shared.fluids.SludgeFluid
 import net.sludgemod.sludge.shared.items.SludgeItem
 import java.util.function.Supplier
 
-
 @Suppress("unused")
 object SludgeInit : ModInitializer {
     private const val MOD_ID = "sludge"
@@ -34,7 +33,7 @@ object SludgeInit : ModInitializer {
     private val SEPARATOR_BLOCK = SeparatorBlock()
 
     //BlockEntities
-    var SEPARATOR_BLOCK_ENTITY: BlockEntityType<SeparatorBlockEntity>? = null
+    lateinit var SEPARATOR_BLOCK_ENTITY: BlockEntityType<SeparatorBlockEntity>
 
     //Items
     val SLUDGE_ITEM = SludgeItem()

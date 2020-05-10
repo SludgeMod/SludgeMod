@@ -10,7 +10,5 @@ import net.sludgemod.sludge.shared.blockentities.SeparatorBlockEntity
 
 class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL)), BlockEntityProvider
 {
-    override fun createBlockEntity(world: BlockView?): BlockEntity? {
-        return SeparatorBlockEntity()
-    }
+    override fun createBlockEntity(world: BlockView) = SeparatorBlockEntity()
 }
