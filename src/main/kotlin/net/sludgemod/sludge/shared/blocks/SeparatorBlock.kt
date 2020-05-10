@@ -8,7 +8,7 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.world.BlockView
 import net.sludgemod.sludge.shared.blockentities.SeparatorBlockEntity
 
-class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL)), BlockEntityProvider
+class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque()), BlockEntityProvider
 {
     override fun createBlockEntity(world: BlockView) = SeparatorBlockEntity()
 }

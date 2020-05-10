@@ -1,6 +1,111 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "minecraft:block/stone"
-  }
+	"parent": "block/block",
+	"texture_size": [64, 64],
+	"textures": {
+		"particle": "sludge:block/separator",
+		"body": "sludge:block/separator"
+	},
+	"elements": [
+		{
+			"name": "fluid_east",
+			"from": [13, 4, 3],
+			"to": [14, 16, 13],
+			"faces": {
+				"east": {"uv": [7, 0, 9.5, 3], "texture": "#body"},
+				"west": {"uv": [7, 3, 9.5, 6], "texture": "#body"},
+				"up": {"uv": [5.75, 15, 5.5, 12.5], "texture": "#body"}
+			}
+		},
+		{
+			"name": "fluid_north",
+			"from": [2, 4, 2],
+			"to": [14, 16, 3],
+			"faces": {
+				"north": {"uv": [4, 4, 7, 7], "texture": "#body"},
+				"east": {"uv": [4, 12.5, 4.25, 15.5], "texture": "#body"},
+				"south": {"uv": [4, 0, 7, 3], "texture": "#body"},
+				"west": {"uv": [4.25, 12.5, 4.5, 15.5], "texture": "#body"},
+				"up": {"uv": [15, 2.25, 12, 2], "texture": "#body"}
+			}
+		},
+		{
+			"name": "fluid_south",
+			"from": [2, 4, 13],
+			"to": [14, 16, 14],
+			"faces": {
+				"north": {"uv": [4, 7, 7, 10], "texture": "#body"},
+				"east": {"uv": [4.5, 12.5, 4.75, 15.5], "texture": "#body"},
+				"south": {"uv": [7, 7, 10, 10], "texture": "#body"},
+				"west": {"uv": [4.75, 12.5, 5, 15.5], "texture": "#body"},
+				"up": {"uv": [15, 2.75, 12, 2.5], "texture": "#body"}
+			}
+		},
+		{
+			"name": "fluid_west",
+			"from": [2, 4, 3],
+			"to": [3, 16, 13],
+			"faces": {
+				"east": {"uv": [0, 8, 2.5, 11], "texture": "#body"},
+				"west": {"uv": [9.5, 0, 12, 3], "texture": "#body"},
+				"up": {"uv": [6.25, 15, 6, 12.5], "texture": "#body"}
+			}
+		},
+		{
+			"name": "base",
+			"from": [0, 0, 0],
+			"to": [16, 4, 16],
+			"faces": {
+				"north": {"uv": [11.5, 3, 15.5, 4], "texture": "#body"},
+				"east": {"uv": [11.5, 4, 15.5, 5], "texture": "#body"},
+				"south": {"uv": [12, 0, 16, 1], "texture": "#body"},
+				"west": {"uv": [12, 1, 16, 2], "texture": "#body"},
+				"up": {"uv": [4, 4, 0, 0], "texture": "#body"},
+				"down": {"uv": [4, 4, 0, 8], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shell_east",
+			"from": [14, 4, 4],
+			"to": [16, 14, 12],
+			"faces": {
+				"north": {"uv": [0, 11, 0.5, 13.5], "texture": "#body"},
+				"east": {"uv": [9.5, 3, 11.5, 5.5], "texture": "#body"},
+				"south": {"uv": [0.5, 11, 1, 13.5], "texture": "#body"},
+				"up": {"uv": [3, 10, 2.5, 8], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shell_north",
+			"from": [4, 4, 0],
+			"to": [12, 14, 2],
+			"faces": {
+				"north": {"uv": [4.5, 10, 6.5, 12.5], "texture": "#body"},
+				"east": {"uv": [1, 11, 1.5, 13.5], "texture": "#body"},
+				"west": {"uv": [1.5, 11, 2, 13.5], "texture": "#body"},
+				"up": {"uv": [6, 3.5, 4, 3], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shell_south",
+			"from": [4, 4, 14],
+			"to": [12, 14, 16],
+			"faces": {
+				"east": {"uv": [2, 11, 2.5, 13.5], "texture": "#body"},
+				"south": {"uv": [10, 5.5, 12, 8], "texture": "#body"},
+				"west": {"uv": [12, 5, 12.5, 7.5], "texture": "#body"},
+				"up": {"uv": [9, 6.5, 7, 6], "texture": "#body"}
+			}
+		},
+		{
+			"name": "shell_west",
+			"from": [0, 4, 4],
+			"to": [2, 14, 12],
+			"faces": {
+				"north": {"uv": [2.5, 12.5, 3, 15], "texture": "#body"},
+				"south": {"uv": [3, 12.5, 3.5, 15], "texture": "#body"},
+				"west": {"uv": [10.5, 8, 12.5, 10.5], "texture": "#body"},
+				"up": {"uv": [4, 10, 3.5, 8], "texture": "#body"}
+			}
+		}
+	]
 }
