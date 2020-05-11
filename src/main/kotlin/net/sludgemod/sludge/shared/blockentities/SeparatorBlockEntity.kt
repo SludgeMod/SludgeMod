@@ -7,11 +7,12 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.Direction
-import net.sludgemod.sludge.SludgeInit
 import net.sludgemod.sludge.shared.blockentities.base.BaseContainerBlockEntity
+import net.sludgemod.sludge.shared.init.BlockEntities
+import net.sludgemod.sludge.shared.init.Blocks
 import net.sludgemod.sludge.shared.screenhandlers.SeparatorScreenHandler
 
-class SeparatorBlockEntity : BaseContainerBlockEntity(SludgeInit.SEPARATOR_BLOCK_ENTITY), SidedInventory {
+class SeparatorBlockEntity : BaseContainerBlockEntity(BlockEntities.SEPARATOR_BLOCK_ENTITY), SidedInventory {
     override val items: DefaultedList<ItemStack> = DefaultedList.ofSize(9, ItemStack.EMPTY)
 
     //region BaseContainerBlockEntity
@@ -19,7 +20,7 @@ class SeparatorBlockEntity : BaseContainerBlockEntity(SludgeInit.SEPARATOR_BLOCK
         return SeparatorScreenHandler(i, playerInventory, this)
     }
 
-    override fun getContainerName(): Text = SludgeInit.SEPARATOR_BLOCK.name
+    override fun getContainerName(): Text = Blocks.SEPARATOR_BLOCK.name
     //endregion
 
     //region SidedInventory

@@ -1,4 +1,4 @@
-package net.sludgemod.sludge.shared.fluids
+package net.sludgemod.sludge.client.init
 
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
@@ -16,9 +16,16 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.BlockRenderView
+import net.sludgemod.sludge.shared.init.Fluids
 
-object FluidManager {
-    @Suppress("DEPRECATION")
+object Renderers {
+    internal fun register() {
+        setupFluidRendering(
+            Fluids.STILL_SLUDGE,
+            Fluids.FLOWING_SLUDGE, Identifier("minecraft", "water"), 0x964b13
+        )
+    }
+
     fun setupFluidRendering(
         still: Fluid,
         flowing: Fluid,

@@ -14,15 +14,17 @@ import net.minecraft.util.math.Direction
 import net.minecraft.world.BlockView
 import net.minecraft.world.IWorld
 import net.minecraft.world.WorldView
-import net.sludgemod.sludge.SludgeInit
+import net.sludgemod.sludge.shared.init.Blocks
+import net.sludgemod.sludge.shared.init.Fluids
+import net.sludgemod.sludge.shared.init.Items
 
 abstract class SludgeFluid : FlowableFluid() {
     override fun toBlockState(state: FluidState): BlockState {
-        return SludgeInit.SLUDGE_FLUID_BLOCK.defaultState.with(FluidBlock.LEVEL, method_15741(state))
+        return Blocks.SLUDGE_FLUID_BLOCK.defaultState.with(FluidBlock.LEVEL, method_15741(state))
     }
 
     override fun getBucketItem(): Item {
-        return SludgeInit.SLUDGE_BUCKET
+        return Items.SLUDGE_BUCKET
     }
 
     override fun getLevelDecreasePerBlock(world: WorldView): Int {
@@ -38,7 +40,7 @@ abstract class SludgeFluid : FlowableFluid() {
     }
 
     override fun getFlowing(): Fluid {
-        return SludgeInit.FLOWING_SLUDGE
+        return Fluids.FLOWING_SLUDGE
     }
 
     override fun isInfinite(): Boolean {
@@ -64,7 +66,7 @@ abstract class SludgeFluid : FlowableFluid() {
     }
 
     override fun getStill(): Fluid {
-        return SludgeInit.STILL_SLUDGE
+        return Fluids.STILL_SLUDGE
     }
 
     override fun beforeBreakingBlock(world: IWorld, pos: BlockPos, state: BlockState) {

@@ -8,7 +8,8 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.sludgemod.sludge.SludgeInit;
+import net.sludgemod.sludge.shared.init.Blocks;
+import net.sludgemod.sludge.shared.init.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +32,7 @@ public abstract class ItemEntityMixin extends Entity {
     )
     private void injectMethod(CallbackInfo info) {
         ItemStack itemStack = this.getStack();
-        if (itemStack.getItem() == SludgeInit.INSTANCE.getSLUDGE_ITEM()) {
+        if (itemStack.getItem() == Items.INSTANCE.getSLUDGE_ITEM()) {
             if (itemStack.getCount() < 10) {
                 return;
             }
@@ -42,7 +43,7 @@ public abstract class ItemEntityMixin extends Entity {
 
             if (Fluids.WATER.getStill() == fluidState.getFluid()) {
                 itemStack.decrement(10);
-                this.world.setBlockState(blockPos, SludgeInit.INSTANCE.getSLUDGE_FLUID_BLOCK().getFluidState(fluidState.getBlockState()).getBlockState());
+                this.world.setBlockState(blockPos, Blocks.INSTANCE.getSLUDGE_FLUID_BLOCK().getFluidState(fluidState.getBlockState()).getBlockState());
             }
         }
     }

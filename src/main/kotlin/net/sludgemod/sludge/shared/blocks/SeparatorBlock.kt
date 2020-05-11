@@ -35,7 +35,7 @@ class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque())
             val blockEntity = world.getBlockEntity(pos)
             if (blockEntity is SeparatorBlockEntity) {
                 ContainerProviderRegistry.INSTANCE.openContainer(
-                    SludgeConstants.Ids.SEPARATOR,
+                    SludgeConstants.BlockIds.SEPARATOR,
                     player
                 ) { buf -> buf.writeBlockPos(pos) }
             }
