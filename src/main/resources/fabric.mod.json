@@ -21,12 +21,19 @@
         "adapter": "kotlin",
         "value": "net.sludgemod.sludge.SludgeInit"
       }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "net.sludgemod.sludge.SludgeInitClient"
+      }
     ]
   },
   "mixins": [
     "sludge.mixins.json"
   ],
   "depends": {
+    "minecraft": ">=1.16-",
     "fabricloader": "*",
     "fabric": "*",
     "fabric-language-kotlin": "*",

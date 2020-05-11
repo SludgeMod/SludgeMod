@@ -1,20 +1,19 @@
 package net.sludgemod.sludge.shared.blockentities.base
 
 import net.minecraft.block.BlockState
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
+import net.minecraft.block.entity.LockableContainerBlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.collection.DefaultedList
 
-abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) : BlockEntity(blockEntityType), Inventory {
+abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) :
+    LockableContainerBlockEntity(blockEntityType) {
 
     abstract val items: DefaultedList<ItemStack>
 
-    //region Inventory
     override fun clear() = items.clear()
 
     override fun setStack(slot: Int, stack: ItemStack) {
@@ -51,9 +50,7 @@ abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) : B
     override fun canPlayerUse(player: PlayerEntity) = true
 
     override fun size() = items.size
-    //endregion
 
-    //region BlockEntity
     override fun fromTag(state: BlockState, tag: CompoundTag) {
         super.fromTag(state, tag)
         Inventories.fromTag(tag, items)
@@ -63,5 +60,4 @@ abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) : B
         Inventories.toTag(tag, items)
         return super.toTag(tag)
     }
-    //endregion
 }
