@@ -1,5 +1,6 @@
 package net.sludgemod.sludge.client.screen
 
+import alexiil.mc.lib.attributes.fluid.volume.FluidVolume
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.ingame.HandledScreen
@@ -20,7 +21,25 @@ class SeparatorHandledScreen(private val separatorScreenHandler: SeparatorScreen
     override fun drawBackground(matrixStack: MatrixStack, f: Float, mouseY: Int, i: Int) {
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f)
         client?.textureManager?.bindTexture(texture)
-        val y = (height - backgroundHeight) / 2
         this.drawTexture(matrixStack, x, y, 0, 0, backgroundWidth, backgroundHeight)
+
+        drawTanks()
+    }
+
+    private fun drawTanks() {
+        for (fluidTank in separatorScreenHandler.separatorBlockEntity.tankInventory.tankIterable()) {
+            val volume: FluidVolume = fluidTank.get()
+            val capacity = fluidTank.maxAmount_F.asInexactDouble()
+            val xPos = x.toDouble() + 8.0
+            val yPos = y - 25.0
+            val width = 16.0
+            val height = 94.0
+
+            if (!volume.isEmpty) {
+                val percentFull = volume.amount_F.asInexactDouble() / capacity
+                val fluidHeight = 52 * percentFull
+                volume.renderGuiRect(xPos, yPos + height - fluidHeight, xPos + width, yPos + height)
+            }
+        }
     }
 }

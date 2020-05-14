@@ -1,6 +1,7 @@
 {
   "itemGroup.sludge.general": "Sludge Mod",
   "item.sludge.sludge_item": "Sludge",
-  "item.sludge.sludge_bucket": "Sludge bucket",
-  "block.sludge.separator": "Separator"
+  "item.sludge.sludge_bucket": "Sludge Bucket",
+  "block.sludge.separator": "Separator",
+  "block.sludge.sludge_fluid": "Sludge"
 }

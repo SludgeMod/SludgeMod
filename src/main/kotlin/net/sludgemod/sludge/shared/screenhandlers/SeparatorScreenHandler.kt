@@ -2,12 +2,16 @@ package net.sludgemod.sludge.shared.screenhandlers
 
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.slot.Slot
+import net.sludgemod.sludge.shared.blockentities.SeparatorBlockEntity
 
-class SeparatorScreenHandler(syncId: Int, playerInventory: PlayerInventory, private val inventory: Inventory) :
+class SeparatorScreenHandler(
+    syncId: Int,
+    playerInventory: PlayerInventory,
+    val separatorBlockEntity: SeparatorBlockEntity
+) :
     ScreenHandler(null, syncId) {
 
     init {
@@ -16,7 +20,7 @@ class SeparatorScreenHandler(syncId: Int, playerInventory: PlayerInventory, priv
 
         for (y in 0..2) {
             for (x in 0..2) {
-                this.addSlot(Slot(inventory, x + y * 3, padding + 63 + x * slotSize, 17 + y * slotSize));
+                this.addSlot(Slot(separatorBlockEntity, x + y * 3, padding + 63 + x * slotSize, 17 + y * slotSize));
             }
         }
 
@@ -31,7 +35,7 @@ class SeparatorScreenHandler(syncId: Int, playerInventory: PlayerInventory, priv
         }
     }
 
-    override fun canUse(player: PlayerEntity) = inventory.canPlayerUse(player)
+    override fun canUse(player: PlayerEntity) = separatorBlockEntity.canPlayerUse(player)
 
     override fun transferSlot(player: PlayerEntity?, invSlot: Int): ItemStack? {
         var newStack = ItemStack.EMPTY
@@ -39,11 +43,11 @@ class SeparatorScreenHandler(syncId: Int, playerInventory: PlayerInventory, priv
         if (slot != null && slot.hasStack()) {
             val originalStack = slot.stack
             newStack = originalStack.copy()
-            if (invSlot < inventory.size()) {
-                if (!insertItem(originalStack, inventory.size(), slots.size, true)) {
+            if (invSlot < separatorBlockEntity.size()) {
+                if (!insertItem(originalStack, separatorBlockEntity.size(), slots.size, true)) {
                     return ItemStack.EMPTY
                 }
-            } else if (!insertItem(originalStack, 0, inventory.size(), false)) {
+            } else if (!insertItem(originalStack, 0, separatorBlockEntity.size(), false)) {
                 return ItemStack.EMPTY
             }
             if (originalStack.isEmpty) {

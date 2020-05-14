@@ -22,7 +22,7 @@ object Renderers {
     internal fun register() {
         setupFluidRendering(
             Fluids.STILL_SLUDGE,
-            Fluids.FLOWING_SLUDGE, Identifier("minecraft", "water"), 0x964b13
+            Fluids.FLOWING_SLUDGE, Identifier("minecraft", "water"), Fluids.SLUDGE_COLOR
         )
     }
 
@@ -73,7 +73,7 @@ object Renderers {
 
         // The FluidRenderer gets the sprites and color from a FluidRenderHandler during rendering
         val renderHandler: FluidRenderHandler = object : FluidRenderHandler {
-            override fun getFluidSprites(view: BlockRenderView, pos: BlockPos, state: FluidState): Array<Sprite?> {
+            override fun getFluidSprites(view: BlockRenderView?, pos: BlockPos?, state: FluidState): Array<Sprite?> {
                 return fluidSprites
             }
 

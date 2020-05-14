@@ -1,5 +1,7 @@
 package net.sludgemod.sludge.shared.blocks
 
+import alexiil.mc.lib.attributes.fluid.FluidInvUtil
+import alexiil.mc.lib.attributes.misc.PlayerInvUtil
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry
 import net.minecraft.block.Block
@@ -19,6 +21,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.sludgemod.sludge.shared.SludgeConstants
 import net.sludgemod.sludge.shared.blockentities.SeparatorBlockEntity
+import net.sludgemod.sludge.shared.init.Items
 
 class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque()), BlockEntityProvider {
     override fun createBlockEntity(world: BlockView) = SeparatorBlockEntity()
@@ -31,9 +34,16 @@ class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque())
         hand: Hand,
         hit: BlockHitResult
     ): ActionResult? {
-        if (!world.isClient) {
-            val blockEntity = world.getBlockEntity(pos)
-            if (blockEntity is SeparatorBlockEntity) {
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity is SeparatorBlockEntity) {
+            if (player.getStackInHand(hand).item == Items.SLUDGE_BUCKET || player.getStackInHand(hand).item == net.minecraft.item.Items.BUCKET) {
+                FluidInvUtil.interactWithTank(
+                    blockEntity.tankInventory,
+                    blockEntity.tankInventory,
+                    player,
+                    PlayerInvUtil.referenceHand(player, hand)
+                )
+            } else {
                 ContainerProviderRegistry.INSTANCE.openContainer(
                     SludgeConstants.BlockIds.SEPARATOR,
                     player
