@@ -14,13 +14,16 @@ object Fluids {
     val STILL_SLUDGE = SludgeFluid.Still()
     val FLOWING_SLUDGE = SludgeFluid.Flowing()
 
+    lateinit var SLUDGE_FLUID_KEY: FluidKey
+
     internal fun register() {
         Registry.register(Registry.FLUID, SludgeConstants.FluidIds.SLUDGE, STILL_SLUDGE)
         Registry.register(Registry.FLUID, Identifier(SludgeConstants.MOD_ID, "flowing_sludge"), FLOWING_SLUDGE)
 
         val fluidKeyBuilder = FluidKey.FluidKeyBuilder(STILL_SLUDGE)
             .setRenderColor(SLUDGE_COLOR)
-            .setName(TranslatableText("block.sludge.sludge_fluid"));
-        FluidKeys.put(STILL_SLUDGE, SimpleFluidKey(fluidKeyBuilder));
+            .setName(TranslatableText("block.sludge.sludge_fluid"))
+        SLUDGE_FLUID_KEY = SimpleFluidKey(fluidKeyBuilder)
+        FluidKeys.put(STILL_SLUDGE, SLUDGE_FLUID_KEY);
     }
 }

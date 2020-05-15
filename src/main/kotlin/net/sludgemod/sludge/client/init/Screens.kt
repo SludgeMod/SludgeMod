@@ -1,7 +1,7 @@
 package net.sludgemod.sludge.client.init
 
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry
-import net.sludgemod.sludge.client.screen.SeparatorHandledScreen
+import net.sludgemod.sludge.client.screens.SeparatorHandledScreen
 import net.sludgemod.sludge.shared.SludgeConstants
 import net.sludgemod.sludge.shared.screenhandlers.SeparatorScreenHandler
 

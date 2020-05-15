@@ -26,7 +26,7 @@ object Renderers {
         )
     }
 
-    fun setupFluidRendering(
+    private fun setupFluidRendering(
         still: Fluid,
         flowing: Fluid,
         textureFluidId: Identifier,
@@ -56,9 +56,7 @@ object Renderers {
 
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES)
             .registerReloadListener(object : SimpleSynchronousResourceReloadListener {
-                override fun getFabricId(): Identifier {
-                    return listenerId
-                }
+                override fun getFabricId() = listenerId
 
                 /**
                  * Get the sprites from the block atlas when resources are reloaded
@@ -73,13 +71,8 @@ object Renderers {
 
         // The FluidRenderer gets the sprites and color from a FluidRenderHandler during rendering
         val renderHandler: FluidRenderHandler = object : FluidRenderHandler {
-            override fun getFluidSprites(view: BlockRenderView?, pos: BlockPos?, state: FluidState): Array<Sprite?> {
-                return fluidSprites
-            }
-
-            override fun getFluidColor(view: BlockRenderView, pos: BlockPos, state: FluidState): Int {
-                return color
-            }
+            override fun getFluidSprites(view: BlockRenderView?, pos: BlockPos?, state: FluidState) = fluidSprites
+            override fun getFluidColor(view: BlockRenderView, pos: BlockPos, state: FluidState) = color
         }
 
         FluidRenderHandlerRegistry.INSTANCE.register(still, renderHandler)

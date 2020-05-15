@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Material
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.BucketItem
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.util.ActionResult
@@ -21,7 +22,6 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import net.sludgemod.sludge.shared.SludgeConstants
 import net.sludgemod.sludge.shared.blockentities.SeparatorBlockEntity
-import net.sludgemod.sludge.shared.init.Items
 
 class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque()), BlockEntityProvider {
     override fun createBlockEntity(world: BlockView) = SeparatorBlockEntity()
@@ -36,14 +36,14 @@ class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque())
     ): ActionResult? {
         val blockEntity = world.getBlockEntity(pos)
         if (blockEntity is SeparatorBlockEntity) {
-            if (player.getStackInHand(hand).item == Items.SLUDGE_BUCKET || player.getStackInHand(hand).item == net.minecraft.item.Items.BUCKET) {
+            if (player.getStackInHand(hand).item is BucketItem) {
                 FluidInvUtil.interactWithTank(
-                    blockEntity.tankInventory,
-                    blockEntity.tankInventory,
+                    blockEntity.tanks.getTank(0),
+                    blockEntity.tanks.getTank(1),
                     player,
                     PlayerInvUtil.referenceHand(player, hand)
                 )
-            } else {
+            } else if (!world.isClient) {
                 ContainerProviderRegistry.INSTANCE.openContainer(
                     SludgeConstants.BlockIds.SEPARATOR,
                     player

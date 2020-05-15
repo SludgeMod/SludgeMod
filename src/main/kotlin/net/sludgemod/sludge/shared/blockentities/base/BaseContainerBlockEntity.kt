@@ -1,5 +1,6 @@
 package net.sludgemod.sludge.shared.blockentities.base
 
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.block.entity.LockableContainerBlockEntity
@@ -10,7 +11,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.collection.DefaultedList
 
 abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) :
-    LockableContainerBlockEntity(blockEntityType) {
+    LockableContainerBlockEntity(blockEntityType), BlockEntityClientSerializable {
 
     abstract val items: DefaultedList<ItemStack>
 
@@ -54,10 +55,23 @@ abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) :
     override fun fromTag(state: BlockState, tag: CompoundTag) {
         super.fromTag(state, tag)
         Inventories.fromTag(tag, items)
+        fromTag(tag, false)
     }
 
     override fun toTag(tag: CompoundTag): CompoundTag {
         Inventories.toTag(tag, items)
+        toTag(tag, false)
         return super.toTag(tag)
     }
+
+    override fun fromClientTag(tag: CompoundTag) {
+        fromTag(tag, true)
+    }
+
+    override fun toClientTag(tag: CompoundTag): CompoundTag {
+        return toTag(tag, true)
+    }
+
+    abstract fun fromTag(tag: CompoundTag, client: Boolean);
+    abstract fun toTag(tag: CompoundTag, client: Boolean): CompoundTag;
 }

@@ -1,5 +1,6 @@
-package net.sludgemod.sludge.client.screen
+package net.sludgemod.sludge.client.screens
 
+import alexiil.mc.lib.attributes.fluid.SingleFluidTank
 import alexiil.mc.lib.attributes.fluid.volume.FluidVolume
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
@@ -23,23 +24,22 @@ class SeparatorHandledScreen(private val separatorScreenHandler: SeparatorScreen
         client?.textureManager?.bindTexture(texture)
         this.drawTexture(matrixStack, x, y, 0, 0, backgroundWidth, backgroundHeight)
 
-        drawTanks()
+        drawTank(separatorScreenHandler.separatorBlockEntity.tanks.getTank(0), 8.0, -25.0)
+        drawTank(separatorScreenHandler.separatorBlockEntity.tanks.getTank(1), 152.0, -25.0)
     }
 
-    private fun drawTanks() {
-        for (fluidTank in separatorScreenHandler.separatorBlockEntity.tankInventory.tankIterable()) {
-            val volume: FluidVolume = fluidTank.get()
-            val capacity = fluidTank.maxAmount_F.asInexactDouble()
-            val xPos = x.toDouble() + 8.0
-            val yPos = y - 25.0
-            val width = 16.0
-            val height = 94.0
+    private fun drawTank(fluidTank: SingleFluidTank, xOffset: Double, yOffset: Double) {
+        val volume: FluidVolume = fluidTank.get()
+        val capacity = fluidTank.maxAmount_F.asInexactDouble()
+        val xPos = x.toDouble() + xOffset
+        val yPos = y + yOffset
+        val width = 16.0
+        val height = 94.0
 
-            if (!volume.isEmpty) {
-                val percentFull = volume.amount_F.asInexactDouble() / capacity
-                val fluidHeight = 52 * percentFull
-                volume.renderGuiRect(xPos, yPos + height - fluidHeight, xPos + width, yPos + height)
-            }
+        if (!volume.isEmpty) {
+            val percentFull = volume.amount_F.asInexactDouble() / capacity
+            val fluidHeight = 52 * percentFull
+            volume.renderGuiRect(xPos, yPos + height - fluidHeight, xPos + width, yPos + height)
         }
     }
 }
