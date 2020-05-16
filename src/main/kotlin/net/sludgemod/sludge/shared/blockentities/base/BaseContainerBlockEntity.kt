@@ -1,5 +1,6 @@
 package net.sludgemod.sludge.shared.blockentities.base
 
+import alexiil.mc.lib.attributes.Simulation
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntityType
@@ -8,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.Inventories
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.screen.ScreenHandler
 import net.minecraft.util.collection.DefaultedList
 
 abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) :
@@ -72,6 +74,36 @@ abstract class BaseContainerBlockEntity(blockEntityType: BlockEntityType<*>) :
         return toTag(tag, true)
     }
 
-    abstract fun fromTag(tag: CompoundTag, client: Boolean);
-    abstract fun toTag(tag: CompoundTag, client: Boolean): CompoundTag;
+    abstract fun fromTag(tag: CompoundTag, client: Boolean)
+    abstract fun toTag(tag: CompoundTag, client: Boolean): CompoundTag
+
+    fun insertItem(itemStack: ItemStack, simulate: Simulation): Boolean {
+        for ((index, currentSlot) in items.withIndex()) {
+            if (currentSlot.isEmpty) {
+                if (simulate == Simulation.ACTION) {
+                    items[index] = itemStack.copy()
+                }
+                return true
+            }
+            if (!ScreenHandler.canStacksCombine(currentSlot, itemStack)) {
+                continue
+            }
+            val remainingSpace = currentSlot.maxCount - currentSlot.count
+            if (remainingSpace == 0) {
+                continue
+            }
+            if (remainingSpace >= itemStack.count) {
+                if (simulate == Simulation.ACTION) {
+                    currentSlot.increment(itemStack.count)
+                }
+                return true
+            } else {
+                if (simulate == Simulation.ACTION) {
+                    currentSlot.increment(remainingSpace)
+                }
+                itemStack.decrement(remainingSpace)
+            }
+        }
+        return false
+    }
 }

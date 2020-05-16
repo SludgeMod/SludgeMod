@@ -28,7 +28,7 @@ class SeparatorBlockEntity : BaseContainerBlockEntity(BlockEntities.SEPARATOR_BL
     val tanks =
         TankInventory(listOf<FluidFilter>(ExactFluidFilter(Fluids.SLUDGE_FLUID_KEY), ExactFluidFilter(FluidKeys.WATER)))
 
-    private var separatorCooldown = -1;
+    private var separatorCooldown = -1
 
     //region BaseContainerBlockEntity
     public override fun createContainer(i: Int, playerInventory: PlayerInventory): ScreenHandler {
@@ -66,19 +66,24 @@ class SeparatorBlockEntity : BaseContainerBlockEntity(BlockEntities.SEPARATOR_BL
             separatorCooldown--
 
             if (separatorCooldown <= 0) {
-                val extractedAmount = tanks.getTank(0).attemptAnyExtraction(FluidAmount.of(1, 20), Simulation.ACTION)
-                if (extractedAmount.amount_F.asInexactDouble() > 0.0) {
-                    var output = getStack(0)
-                    if (output.isEmpty) {
-                        output = ItemStack(Items.DIRT)
-                    } else if (output.item == Items.DIRT) {
-                        output.increment(1)
-                    }
-                    setStack(0, output)
+                val sludgeExtractionAmount = FluidAmount.of(6, 10)
+                val waterInsertionAmount = FluidAmount.of(3, 10)
+
+                val craftAction = { simulation: Simulation ->
+                    insertItem(ItemStack(Items.DIRT), simulation)
+                            && tanks.getTank(0)
+                        .attemptAnyExtraction(sludgeExtractionAmount, simulation).amount_F == sludgeExtractionAmount
+                            && tanks.getTank(1).attemptInsertion(
+                        FluidKeys.WATER.withAmount(waterInsertionAmount),
+                        simulation
+                    ).amount_F == FluidAmount.ZERO
                 }
-                tanks.getTank(1)
-                    .attemptInsertion(FluidKeys.WATER.withAmount(extractedAmount.amount_F / 2), Simulation.ACTION)
-                separatorCooldown = 8
+
+                if (craftAction(Simulation.SIMULATE)
+                ) {
+                    craftAction(Simulation.ACTION)
+                    separatorCooldown = 100
+                }
             }
 
             if (tanks.hasChanged()) {
