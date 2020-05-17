@@ -13,7 +13,7 @@ object BlockEntities {
         SEPARATOR_BLOCK_ENTITY = Registry.register(
             Registry.BLOCK_ENTITY_TYPE,
             SludgeConstants.BlockIds.SEPARATOR,
-            BlockEntityType.Builder.create(Supplier { SeparatorBlockEntity() }, Blocks.SEPARATOR_BLOCK).build(null)
+            BlockEntityType.Builder.create(Supplier(::SeparatorBlockEntity), Blocks.SEPARATOR_BLOCK).build(null)
         )
     }
 }

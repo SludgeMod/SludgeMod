@@ -38,8 +38,8 @@ class SeparatorBlock : Block(FabricBlockSettings.of(Material.METAL).nonOpaque())
         if (blockEntity is SeparatorBlockEntity) {
             if (player.getStackInHand(hand).item is BucketItem) {
                 FluidInvUtil.interactWithTank(
-                    blockEntity.tanks.getTank(0),
-                    blockEntity.tanks.getTank(1),
+                    blockEntity.getInputTank(),
+                    blockEntity.getOutputTank(),
                     player,
                     PlayerInvUtil.referenceHand(player, hand)
                 )

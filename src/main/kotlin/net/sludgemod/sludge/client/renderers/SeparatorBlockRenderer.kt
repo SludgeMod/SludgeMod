@@ -24,7 +24,7 @@ class SeparatorBlockRenderer(dispatcher: BlockEntityRenderDispatcher) :
         overlay: Int
     ) {
         renderSurfaceFluid(
-            entity.tanks.getTank(0),
+            entity.getInputTank(),
             vertexConsumerProvider,
             entity,
             matrices,
@@ -37,7 +37,7 @@ class SeparatorBlockRenderer(dispatcher: BlockEntityRenderDispatcher) :
             light
         )
         renderSurfaceFluid(
-            entity.tanks.getTank(1),
+            entity.getOutputTank(),
             vertexConsumerProvider,
             entity,
             matrices,
@@ -66,11 +66,6 @@ class SeparatorBlockRenderer(dispatcher: BlockEntityRenderDispatcher) :
     ) {
         val fluidVolume = tank.get()
         if (!fluidVolume.isEmpty) {
-            val xPos = 1.0f / 16.0f * xMin
-            val zPos = 1.0f / 16.0f * zMin
-            val xEndPos = 1.0f / 16.0f * xMax
-            val zEndPos = 1.0f / 16.0f * zMax
-
             val buffer = vertexConsumerProvider.getBuffer(RenderLayer.getSolid())
             val fluid = fluidVolume.rawFluid
             val handler = FluidRenderHandlerRegistry.INSTANCE[fluid]
@@ -80,6 +75,11 @@ class SeparatorBlockRenderer(dispatcher: BlockEntityRenderDispatcher) :
             MinecraftClient.getInstance().textureManager.bindTexture(SpriteAtlasTexture.BLOCK_ATLAS_TEX)
             val height = fluidVolume.amount_F.asInexactDouble().toFloat() / tank.maxAmount_F.asInexactDouble()
                 .toFloat() * yMax + yMin - 0.5f
+
+            val xPos = 1.0f / 16.0f * xMin
+            val zPos = 1.0f / 16.0f * zMin
+            val xEndPos = 1.0f / 16.0f * xMax
+            val zEndPos = 1.0f / 16.0f * zMax
             val yPos = 1.0f / 16.0f * height
 
             val r = (color shr 16 and 255).toFloat() / 255.0f

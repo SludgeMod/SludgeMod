@@ -24,8 +24,8 @@ class SeparatorHandledScreen(private val separatorScreenHandler: SeparatorScreen
         client?.textureManager?.bindTexture(texture)
         this.drawTexture(matrixStack, x, y, 0, 0, backgroundWidth, backgroundHeight)
 
-        drawTank(separatorScreenHandler.separatorBlockEntity.tanks.getTank(0), 8.0, -25.0)
-        drawTank(separatorScreenHandler.separatorBlockEntity.tanks.getTank(1), 152.0, -25.0)
+        drawTank(separatorScreenHandler.separatorBlockEntity.getInputTank(), 8.0, -25.0)
+        drawTank(separatorScreenHandler.separatorBlockEntity.getOutputTank(), 152.0, -25.0)
     }
 
     private fun drawTank(fluidTank: SingleFluidTank, xOffset: Double, yOffset: Double) {

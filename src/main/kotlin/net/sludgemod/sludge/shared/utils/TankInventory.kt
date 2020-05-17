@@ -7,9 +7,9 @@ import alexiil.mc.lib.attributes.fluid.impl.SimpleFixedFluidInv
 import alexiil.mc.lib.attributes.fluid.volume.FluidKey
 import net.minecraft.util.collection.DefaultedList
 
-class TankInventory(private val fluidFilters: List<FluidFilter>) :
-    SimpleFixedFluidInv(fluidFilters.size, FluidAmount(5)) {
-    private var serverFluidCaches = DefaultedList.ofSize(fluidFilters.size, FluidVolumeUtil.EMPTY)
+class TankInventory(tankCount: Int, tankCapacity: Long, private val fluidFilter: FluidFilter) :
+    SimpleFixedFluidInv(tankCount, FluidAmount(tankCapacity)) {
+    private var serverFluidCaches = DefaultedList.ofSize(tankCount, FluidVolumeUtil.EMPTY)
 
     fun hasChanged(): Boolean {
         var anyChanged = false;
@@ -23,8 +23,8 @@ class TankInventory(private val fluidFilters: List<FluidFilter>) :
     }
 
     override fun isFluidValidForTank(tank: Int, fluid: FluidKey): Boolean {
-        return fluid.isEmpty || fluidFilters[tank].matches(fluid)
+        return fluid.isEmpty || fluidFilter.matches(fluid)
     }
 
-    override fun getFilterForTank(tank: Int) = fluidFilters[tank]
+    override fun getFilterForTank(tank: Int) = fluidFilter
 }
