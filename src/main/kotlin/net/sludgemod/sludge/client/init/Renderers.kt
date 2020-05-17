@@ -2,6 +2,7 @@ package net.sludgemod.sludge.client.init
 
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
+import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
@@ -16,6 +17,8 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.BlockRenderView
+import net.sludgemod.sludge.client.renderers.SeparatorBlockRenderer
+import net.sludgemod.sludge.shared.init.BlockEntities
 import net.sludgemod.sludge.shared.init.Fluids
 
 object Renderers {
@@ -24,6 +27,8 @@ object Renderers {
             Fluids.STILL_SLUDGE,
             Fluids.FLOWING_SLUDGE, Identifier("minecraft", "water"), Fluids.SLUDGE_COLOR
         )
+
+        BlockEntityRendererRegistry.INSTANCE.register(BlockEntities.SEPARATOR_BLOCK_ENTITY, ::SeparatorBlockRenderer)
     }
 
     private fun setupFluidRendering(
