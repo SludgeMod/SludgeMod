@@ -1,4 +1,4 @@
-package net.sludgemod.sludge.shared.fluids
+package net.sludgemod.sludge.client.init
 
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
@@ -16,10 +16,17 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.BlockRenderView
+import net.sludgemod.sludge.shared.init.Fluids
 
-object FluidManager {
-    @Suppress("DEPRECATION")
-    fun setupFluidRendering(
+object Renderers {
+    internal fun register() {
+        setupFluidRendering(
+            Fluids.STILL_SLUDGE,
+            Fluids.FLOWING_SLUDGE, Identifier("minecraft", "water"), Fluids.SLUDGE_COLOR
+        )
+    }
+
+    private fun setupFluidRendering(
         still: Fluid,
         flowing: Fluid,
         textureFluidId: Identifier,
@@ -49,9 +56,7 @@ object FluidManager {
 
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES)
             .registerReloadListener(object : SimpleSynchronousResourceReloadListener {
-                override fun getFabricId(): Identifier {
-                    return listenerId
-                }
+                override fun getFabricId() = listenerId
 
                 /**
                  * Get the sprites from the block atlas when resources are reloaded
@@ -66,13 +71,8 @@ object FluidManager {
 
         // The FluidRenderer gets the sprites and color from a FluidRenderHandler during rendering
         val renderHandler: FluidRenderHandler = object : FluidRenderHandler {
-            override fun getFluidSprites(view: BlockRenderView, pos: BlockPos, state: FluidState): Array<Sprite?> {
-                return fluidSprites
-            }
-
-            override fun getFluidColor(view: BlockRenderView, pos: BlockPos, state: FluidState): Int {
-                return color
-            }
+            override fun getFluidSprites(view: BlockRenderView?, pos: BlockPos?, state: FluidState) = fluidSprites
+            override fun getFluidColor(view: BlockRenderView, pos: BlockPos, state: FluidState) = color
         }
 
         FluidRenderHandlerRegistry.INSTANCE.register(still, renderHandler)
